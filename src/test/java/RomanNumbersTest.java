@@ -35,7 +35,14 @@ public class RomanNumbersTest
     {
         assertThat(number.calculate(16), equalTo("XVI"));
         assertThat(number.calculate(17), equalTo("XVII"));
-        //assertThat(number.calculate(19), equalTo("IXX"));
-        // assertThat(number.calculate(20), equalTo("XX"));
+        assertThat(number.calculate(19), equalTo("XIX"));
+        assertThat(number.calculate(20), equalTo("XX"));
+    }
+    @Test public void testPredefinedResult30To50()
+    {
+        assertThat(number.calculate(38), equalTo("XXXVIII"));
+        assertThat(number.calculate(40), equalTo("XL"));
+        assertThat(number.calculate(42), equalTo("XLII"));
+        assertThat(number.calculate(46), equalTo("XLVI"));
     }
 }

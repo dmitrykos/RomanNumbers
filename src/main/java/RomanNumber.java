@@ -3,70 +3,81 @@ import java.util.LinkedHashMap;
 
 public class RomanNumber
 {
-
-    RomanNumber()
-    {
-
-    }
+    int remainder;
 
     public String calculate(int decimalNumber)
     {
-        if (decimalNumber <= 5)
-            return getLiteral1To5(decimalNumber);
-        else if(decimalNumber<=10){
-            return getLiteral6to10(decimalNumber);
-        }else if(decimalNumber<=20){
-            return getLiteral11to20(decimalNumber);
-        }else{
-            return "";
-        }
+        remainder = decimalNumber;
+
+        String ret = "";
+        ret += getLiteralL(remainder);
+        ret += getLiteralX(remainder);
+        ret += getLiteralV(remainder);
+        ret += getLiteralI(remainder);
+        return ret;
     }
 
-    private String getLiteral11to20(int decimalNumber)
+    private String getLiteralL(int decimalNumber)
     {
-        int upper = ((decimalNumber / 10) * 10);
-        int lower = decimalNumber - upper;
+        int divisionValue = decimalNumber / 50;
 
-        String numerals = "";
+        String ret = "";
+        if(decimalNumber >= 40){
+            ret = "XL";
+            remainder -= 40;
+        }
+        else {
+            for (int i = 0; i < divisionValue; i++) {
+                ret += "L";
+            }
+            remainder -= divisionValue * 50;
+        }
+        return ret;
+    }
+    private String getLiteralX(int decimalNumber)
+    {
+        int divisionValue = decimalNumber / 10;
 
-        if (decimalNumber >= 10)
+        String ret = "";
+        if(decimalNumber ==9){
+            ret = "IX";
+            remainder = 0;
+        }
+        else {
+            for (int i = 0; i < divisionValue; i++) {
+                ret += "X";
+            }
+        }
+        remainder -= divisionValue * 10;
+        return ret;
+    }
+    private String getLiteralV(int decimalNumber)
+    {
+        int divisionValue = decimalNumber / 5;
+
+        if (decimalNumber > 8)
         {
-            numerals = getLiteral6to10(upper);
+            remainder = 0;
+            return "IX";
         }
 
-        if (lower >= 6 && lower <= 10)
-            numerals += getLiteral6to10(lower);
+        remainder -= divisionValue * 5;
+        if (divisionValue != 0)
+            return "V";
 
-        numerals += getLiteral1To5(lower);
-
-        return numerals;
+        return "";
     }
 
-    private String getLiteral6to10(int decimalNumber)
+    private String getLiteralI(int decimalNumber)
     {
-        switch (decimalNumber)
-        {
-            case 6: return "VI";
-            case 7: return "VII";
-            case 8: return "VIII";
-            case 9: return "IX";
-            case 10: return "X";
-            default:
-                return "";
+        String ret = "";
+        if(decimalNumber == 4){
+            ret = "IV";
+            return ret;
         }
-    }
-
-    private String getLiteral1To5(int decimalNumber)
-    {
-        switch (decimalNumber)
-        {
-            case 1: return "I";
-            case 2: return "II";
-            case 3: return "III";
-            case 4: return "IV";
-            case 5: return "V";
-            default:
-                return "";
+        for(int i=0; i < decimalNumber;i++){
+            ret += "I";
         }
+        return ret;
     }
 }
