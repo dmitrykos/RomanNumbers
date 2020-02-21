@@ -45,4 +45,28 @@ public class RomanNumbersTest
         assertThat(number.calculate(42), equalTo("XLII"));
         assertThat(number.calculate(46), equalTo("XLVI"));
     }
+    @Test public void testPredefinedResult50s()
+    {
+        assertThat(number.calculate(50), equalTo("L"));
+    }
+    @Test public void testPredefinedResult80s()
+    {
+        assertThat(number.calculate(80), equalTo("LXXX"));
+        assertThat(number.calculate(86), equalTo("LXXXVI"));
+    }
+    @Test public void testPredefinedResult90s()
+    {
+        assertThat(number.calculate(90), equalTo("XC"));
+        assertThat(number.calculate(91), equalTo("XCI"));
+        assertThat(number.calculate(98), equalTo("XCVIII"));
+    }
+    @Test public void testPredefinedResult100s()
+    {
+        assertThat(number.calculate(100), equalTo("C"));
+        assertThat(number.calculate(101), equalTo("CI"));
+    }
+    @Test public void testPredefinedResult300s()
+    {
+        assertThat(number.calculate(387), equalTo("CCCLXXXVII"));
+    }
 }

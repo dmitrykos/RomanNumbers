@@ -10,6 +10,7 @@ public class RomanNumber
         remainder = decimalNumber;
 
         String ret = "";
+        ret += getLiteralC(remainder);
         ret += getLiteralL(remainder);
         ret += getLiteralX(remainder);
         ret += getLiteralV(remainder);
@@ -17,12 +18,29 @@ public class RomanNumber
         return ret;
     }
 
+    private String getLiteralC(int decimalNumber)
+    {
+        int divisionValue = decimalNumber / 100;
+
+        String ret = "";
+        if(decimalNumber >= 90 && divisionValue == 0){
+            ret = "XC";
+            remainder -= 90;
+        }
+        else {
+            for (int i = 0; i < divisionValue; i++) {
+                ret += "C";
+            }
+            remainder -= divisionValue * 100;
+        }
+        return ret;
+    }
     private String getLiteralL(int decimalNumber)
     {
         int divisionValue = decimalNumber / 50;
 
         String ret = "";
-        if(decimalNumber >= 40){
+        if(decimalNumber >= 40 && divisionValue == 0){
             ret = "XL";
             remainder -= 40;
         }
