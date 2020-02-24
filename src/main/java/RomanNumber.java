@@ -5,12 +5,22 @@ public class RomanNumber {
         remainder = decimalNumber;
 
         String ret = "";
+        ret += getLiteralM(remainder);
+        ret += getLiteralD(remainder);
         ret += getLiteralC(remainder);
         ret += getLiteralL(remainder);
         ret += getLiteralX(remainder);
         ret += getLiteralV(remainder);
         ret += getLiteralI(remainder);
         return ret;
+    }
+
+    private String getLiteralM(int decimalNumber) {
+        return getLiteral(decimalNumber, "M", 1000, "CM");
+    }
+
+    private String getLiteralD(int decimalNumber) {
+        return getLiteral(decimalNumber, "D", 500, "CD");
     }
 
     private String getLiteralC(int decimalNumber) {
@@ -49,19 +59,32 @@ public class RomanNumber {
         return ret;
     }
 
-    private String getLiteral(int decimalNumber, String segment, int corner_dnum, String corner_rnum) {
-        int divisionValue = decimalNumber / corner_dnum;
+    private String getLiteral(int decimalNumber, String segment, int cornerDecimalNumber, String cornerRomanLiteral) {
+        if (remainder == 0)
+            return "";
+        int divisionValue = decimalNumber / cornerDecimalNumber;
         String ret = "";
-        int corner_dnum_min = corner_dnum - (corner_dnum <= 10 ? 1 : 10);
-        if ((decimalNumber >= corner_dnum_min) && (divisionValue == 0)) {
-            ret = corner_rnum;
-            remainder -= corner_dnum_min;
+        int cornerDecimalNumberMin = cornerDecimalNumber - getCornerSubstractor(cornerDecimalNumber);
+        if ((decimalNumber >= cornerDecimalNumberMin) && (divisionValue == 0)) {
+            ret = cornerRomanLiteral;
+            remainder -= cornerDecimalNumberMin;
         } else {
             for (int i = 0; i < divisionValue; i++) {
                 ret += segment;
             }
-            remainder -= divisionValue * corner_dnum;
+            remainder -= divisionValue * cornerDecimalNumber;
         }
         return ret;
+    }
+
+    private int getCornerSubstractor(int cornerDecimalNumber)
+    {
+        int substractor = 1;
+        while (cornerDecimalNumber > 10)
+        {
+            cornerDecimalNumber /= 10;
+            substractor *= 10;
+        }
+        return substractor;
     }
 }

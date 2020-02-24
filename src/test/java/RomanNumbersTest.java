@@ -76,4 +76,38 @@ public class RomanNumbersTest {
     public void testPredefinedResult300s() {
         assertThat(number.calculate(387), equalTo("CCCLXXXVII"));
     }
+
+    @Test
+    public void testPredefinedResult400s() {
+        assertThat(number.calculate(400), equalTo("CD"));
+        assertThat(number.calculate(401), equalTo("CDI"));
+        assertThat(number.calculate(439), equalTo("CDXXXIX"));
+    }
+
+    @Test
+    public void testPredefinedResult500s() {
+        assertThat(number.calculate(500), equalTo("D"));
+        assertThat(number.calculate(501), equalTo("DI"));
+        assertThat(number.calculate(539), equalTo("DXXXIX"));
+        assertThat(number.calculate(599), equalTo("DXCIX"));
+    }
+
+    @Test
+    public void testPredefinedResult900s() {
+        assertThat(number.calculate(900), equalTo("CM"));
+        assertThat(number.calculate(918), equalTo("CMXVIII"));
+        assertThat(number.calculate(994), equalTo("CMXCIV"));
+    }
+
+    @Test
+    public void testPredefinedResult1000s() {
+        assertThat(number.calculate(1000), equalTo("M"));
+        assertThat(number.calculate(1001), equalTo("MI"));
+        assertThat(number.calculate(1366), equalTo("MCCCLXVI"));
+    }
+
+    @Test
+    public void testPredefinedResult2000s() {
+        assertThat(number.calculate(2020), equalTo("MMXX"));
+    }
 }
