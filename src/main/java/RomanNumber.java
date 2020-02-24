@@ -3,7 +3,6 @@ public class RomanNumber {
 
     public String calculate(int decimalNumber) {
         remainder = decimalNumber;
-
         String ret = "";
         ret += getLiteralM(remainder);
         ret += getLiteralD(remainder);
@@ -41,12 +40,7 @@ public class RomanNumber {
             remainder = 0;
             return "IX";
         }
-        String ret = "";
-        for (int i = 0; i < divisionValue; i++) {
-            ret += "V";
-        }
-        remainder -= divisionValue * 5;
-        return ret;
+        return getLiteralSegments("V", 5, divisionValue);
     }
 
     private String getLiteralI(int decimalNumber) {
@@ -54,12 +48,7 @@ public class RomanNumber {
         if (decimalNumber == 4) {
             return "IV";
         }
-        String ret = "";
-        for (int i = 0; i < divisionValue; i++) {
-            ret += "I";
-        }
-        remainder -= divisionValue * 1;
-        return ret;
+        return getLiteralSegments("I", 1, divisionValue);
     }
 
     private String getLiteral(int decimalNumber, String segment, int cornerDecimalNumber, String cornerRomanLiteral) {
@@ -72,19 +61,23 @@ public class RomanNumber {
             ret = cornerRomanLiteral;
             remainder -= cornerDecimalNumberMin;
         } else {
-            for (int i = 0; i < divisionValue; i++) {
-                ret += segment;
-            }
-            remainder -= divisionValue * cornerDecimalNumber;
+            ret = getLiteralSegments(segment, cornerDecimalNumber, divisionValue);
         }
         return ret;
     }
 
-    private int getCornerSubstractor(int cornerDecimalNumber)
-    {
+    private String getLiteralSegments(String segment, int cornerDecimalNumber, int divisionValue) {
+        String ret = "";
+        for (int i = 0; i < divisionValue; i++) {
+            ret += segment;
+        }
+        remainder -= divisionValue * cornerDecimalNumber;
+        return ret;
+    }
+
+    private int getCornerSubstractor(int cornerDecimalNumber) {
         int substractor = 1;
-        while (cornerDecimalNumber > 10)
-        {
+        while (cornerDecimalNumber > 10) {
             cornerDecimalNumber /= 10;
             substractor *= 10;
         }
