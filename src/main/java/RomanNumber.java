@@ -14,48 +14,15 @@ public class RomanNumber {
     }
 
     private String getLiteralC(int decimalNumber) {
-        int divisionValue = decimalNumber / 100;
-        String ret = "";
-        if (decimalNumber >= 90 && divisionValue == 0) {
-            ret = "XC";
-            remainder -= 90;
-        } else {
-            for (int i = 0; i < divisionValue; i++) {
-                ret += "C";
-            }
-            remainder -= divisionValue * 100;
-        }
-        return ret;
+        return getLiteral(decimalNumber, "C", 100, "XC");
     }
 
     private String getLiteralL(int decimalNumber) {
-        int divisionValue = decimalNumber / 50;
-        String ret = "";
-        if (decimalNumber >= 40 && divisionValue == 0) {
-            ret = "XL";
-            remainder -= 40;
-        } else {
-            for (int i = 0; i < divisionValue; i++) {
-                ret += "L";
-            }
-            remainder -= divisionValue * 50;
-        }
-        return ret;
+        return getLiteral(decimalNumber, "L", 50, "XL");
     }
 
     private String getLiteralX(int decimalNumber) {
-        int divisionValue = decimalNumber / 10;
-        String ret = "";
-        if (decimalNumber == 9 && divisionValue == 0) {
-            ret = "IX";
-            remainder = 0;
-        } else {
-            for (int i = 0; i < divisionValue; i++) {
-                ret += "X";
-            }
-            remainder -= divisionValue * 10;
-        }
-        return ret;
+        return getLiteral(decimalNumber, "X", 10, "IX");
     }
 
     private String getLiteralV(int decimalNumber) {
@@ -78,6 +45,22 @@ public class RomanNumber {
         }
         for (int i = 0; i < decimalNumber; i++) {
             ret += "I";
+        }
+        return ret;
+    }
+
+    private String getLiteral(int decimalNumber, String segment, int corner_dnum, String corner_rnum) {
+        int divisionValue = decimalNumber / corner_dnum;
+        String ret = "";
+        int corner_dnum_min = corner_dnum - (corner_dnum <= 10 ? 1 : 10);
+        if ((decimalNumber >= corner_dnum_min) && (divisionValue == 0)) {
+            ret = corner_rnum;
+            remainder -= corner_dnum_min;
+        } else {
+            for (int i = 0; i < divisionValue; i++) {
+                ret += segment;
+            }
+            remainder -= divisionValue * corner_dnum;
         }
         return ret;
     }
