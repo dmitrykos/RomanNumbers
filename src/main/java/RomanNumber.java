@@ -41,21 +41,24 @@ public class RomanNumber {
             remainder = 0;
             return "IX";
         }
+        String ret = "";
+        for (int i = 0; i < divisionValue; i++) {
+            ret += "V";
+        }
         remainder -= divisionValue * 5;
-        if (divisionValue != 0)
-            return "V";
-        return "";
+        return ret;
     }
 
     private String getLiteralI(int decimalNumber) {
-        String ret = "";
+        int divisionValue = decimalNumber / 1;
         if (decimalNumber == 4) {
-            ret = "IV";
-            return ret;
+            return "IV";
         }
-        for (int i = 0; i < decimalNumber; i++) {
+        String ret = "";
+        for (int i = 0; i < divisionValue; i++) {
             ret += "I";
         }
+        remainder -= divisionValue * 1;
         return ret;
     }
 
